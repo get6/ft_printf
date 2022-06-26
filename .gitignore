@@ -3,3 +3,4 @@ main.c
 *.o
 *.a
 .vscode/
+libft/

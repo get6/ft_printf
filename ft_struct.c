@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_struct.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 14:47:52 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/06/08 20:50:07 by sunhwang         ###   ########.fr       */
+/*   Created: 2022/06/05 18:34:05 by sunhwang          #+#    #+#             */
+/*   Updated: 2022/06/26 20:03:55 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_safer_free(void **ptr)
+t_counter	*ft_counternew(void)
 {
-	if (ptr == NULL || *ptr == NULL)
-		return ;
-	free(*ptr);
-	*ptr = NULL;
+	t_counter	*new;
+
+	new = (t_format *)malloc(sizeof(t_counter));
+	new->total = 0;
+	new->length = 0;
+	new->head = NULL;
+	return (new);
 }
 
-void	ft_putchar(char c)
+t_format	*ft_formatnew(void)
 {
-	write(1, &c, 1);
-}
+	t_format	*new;
 
-void	ft_putstr(char *s)
-{
-	int	s_len;
-
-	if (s == NULL)
-		return ;
-	s_len = ft_strlen(s);
-	write(1, s, s_len + 1);
+	new = (t_format *)malloc(sizeof(t_format));
+	new->flags = NULL;
+	return (new);
 }

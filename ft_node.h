@@ -6,13 +6,12 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:06:39 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/06/21 11:04:48 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/06/28 20:54:52 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_NODE_H
 # define FT_NODE_H
-# include <stdlib.h>
 
 typedef struct s_node
 {
@@ -36,12 +35,5 @@ t_node	*get_node(t_linked_list *list, int (*compare)(void *d1, void *d2), \
 	void *data);
 void	display_linked_list(t_linked_list *list, \
 	void (*display)(t_linked_list *list));
-
-// Queue
-typedef t_linked_list	t_queue;
-
-void	initialize_queue(t_queue *queue);
-void	enqueue(t_queue *queue, void *node);
-void	*dequeue(t_queue *queue);
 
 #endif

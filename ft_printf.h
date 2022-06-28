@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:26:31 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/06/25 18:15:41 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/06/28 20:54:33 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "libft/libft.h"
+# include "ft_struct.h"
 # include "ft_node.h"
+# include "ft_queue.h"
+
 # include <stdio.h> // for test
 
-typedef struct s_counter
-{
-	int				total;
-	int				length;
-	struct s_format	*head;
-}	t_counter;
-
-typedef struct s_format
-{
-	char			flags;
-	char			width;
-	char			precision;
-	char			size;
-	char			type;
-	void			*value;
-	t_operation		**operations;
-}	t_format;
+typedef t_format*	(*t_operation)(t_format format, void *value);
 
 // ft_printf.c
 void	ft_putchar(char c);
@@ -63,11 +50,11 @@ int		ft_printf(const char *format, ...);
 void	ft_safer_free(void **ptr);
 
 // ft_operations.c
-typedef t_format*	(*t_operation)(t_format, void *value);
 void	ft_initialize_operations_array(t_operation *operations);
 void	ft_evaluate_array(t_operation *operations, t_format *format);
 
 // ft_struct.c
 t_counter	*ft_counternew(void);
+t_format	*ft_formatnew(void);
 
 #endif

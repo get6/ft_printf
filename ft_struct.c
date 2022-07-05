@@ -6,37 +6,92 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 18:34:05 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/06/28 20:22:17 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/05 22:05:29 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_counter	*ft_counternew(void)
+t_counter	*ft_counter_new(va_list ap)
 {
 	t_counter	*new;
 
-	new = (t_format *)malloc(sizeof(t_counter));
+	new = (t_counter *)malloc(sizeof(t_counter));
 	if (new == NULL)
 		return (NULL);
 	new->total = 0;
-	new->length = 0;
-	new->head = NULL;
+	new->ap = ap;
 	return (new);
 }
 
-t_format	*ft_formatnew(void)
+t_flag	*ft_flag_new(void)
+{
+	t_flag	*new;
+
+	new = (t_flag *)malloc(sizeof(t_flag));
+	if (new == NULL)
+		return (NULL);
+	new->plus = 1;
+	new->minus = 0;
+	new->blank = 1;
+	new->sharp = 0;
+	new->zero = 0;
+	return (new);
+}
+
+t_option	*ft_optional_new(void)
+{
+	t_option	*new;
+
+	new = (t_option *)malloc(sizeof(t_option));
+	if (new == NULL)
+		return (NULL);
+	new->flags = ft_flag_new();
+	if (new->flags == NULL)
+	{
+		ft_safer_free((void **)&new);
+		return (NULL);
+	}
+	new->width = 0;
+	new->precision = 0;
+	return (new);
+}
+
+t_stack	*ft_stack_new(void)
+{
+	t_stack	*new;
+
+	new = (t_stack *)malloc(sizeof(t_stack));
+	if (new == NULL)
+		return (NULL);
+	initialize_stack(new);
+	return (new);
+}
+
+t_format	*ft_format_new(void)
 {
 	t_format	*new;
 
 	new = (t_format *)malloc(sizeof(t_format));
 	if (new == NULL)
 		return (NULL);
-	new->flags = (t_flag *)malloc(sizeof(t_flag));
-	if (new->flags == NULL)
+	new->option = ft_optional_new();
+	if (new->option == NULL)
 	{
-		ft_safer_free(&new);
+		ft_safer_free((void **)&new);
 		return (NULL);
 	}
+	new->operations = ft_stack_new();
+	if (new->operations == NULL)
+	{
+		ft_safer_free((void **)&new->option);
+		ft_safer_free((void **)&new);
+		return (NULL);
+	}
+	new->value = NULL;
+	new->print = NULL;
+	new->index = NULL;
+	new->length = 0;
+	new->type = '\0';
 	return (new);
 }

@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_queue.h                                         :+:      :+:    :+:   */
+/*   ft_type2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/28 20:50:25 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/06/28 20:51:12 by sunhwang         ###   ########.fr       */
+/*   Created: 2022/07/05 15:54:24 by sunhwang          #+#    #+#             */
+/*   Updated: 2022/07/05 21:27:39 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_QUEUE_H
-# define FT_QUEUE_H
+#include "ft_printf.h"
 
-# include "ft_node.h"
+void	ft_type_usigned_decial(t_counter *cnt, t_format *fmt)
+{
+	(void)cnt;
+	(void)fmt;
+}
 
-// Queue
-typedef t_linked_list	t_queue;
+void	ft_type_lower_hexadecimal(t_counter *cnt, t_format *fmt)
+{
+	(void)cnt;
+	(void)fmt;
+}
 
-void	initialize_queue(t_queue *queue);
-void	enqueue(t_queue *queue, void *node);
-void	*dequeue(t_queue *queue);
+void	ft_type_upper_hexadecimal(t_counter *cnt, t_format *fmt)
+{
+	(void)cnt;
+	(void)fmt;
+}
 
-#endif
+void	ft_type_percent(t_counter *cnt, t_format *fmt)
+{
+	(void)cnt;
+	(void)fmt;
+}

@@ -6,89 +6,84 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:26:33 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/06/28 21:13:03 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/05 16:25:18 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/**
- * 찾고자 하는
-*/
-char	*ft_check_conversion(char *format)
+void	ft_check_conversion(const char *str, t_format *fmt, t_operation *ops)
 {
-	int		i;
-	char	c;
-
-	c = *format;
-	i = 0;
-	if ('c' == c)
-		i = 1;
-	else if ('s' == c)
-		i = 1;
-	else if ('p' == c)
-		i = 1;
-	else if ('d' == c)
-		i = 1;
-	else if ('i' == c)
-		i = 1;
-	else if ('u' == c)
-		i = 1;
-	else if ('x' == c)
-		i = 1;
-	else if ('X' == c)
-		i = 1;
-	return (NULL);
+	ft_check_flags(str, fmt, ops);
+	ft_check_width(str, fmt, ops);
+	ft_check_precision(str, fmt, ops);
+	ft_check_type(str, fmt, ops);
 }
 
-int	ft_get_format(const char *format)
+int	ft_check_total(t_counter *cnt, int length)
 {
-	char	c;
-
-	c = *format;
-	return (0);
-}
-
-void	ft_loop_format(const char *format, va_list ap, \
-t_counter *counter, t_operation *operations)
-{
-	char	c;
-	int		i;
-
-	i = counter->total;
-	while (*(format + i) != '\0')
+	if (cnt->total + length < 2147483647)
+		cnt->total += length;
+	else
 	{
-		c = *(format + i);
-		if (c == '%' && ft_check_conversion((char *)format + i) != NULL)
-		{
+		cnt->total = -1;
+		return (0);
+	}
+	return (1);
+}
 
-			format = ft_formatnew();
-			if (format == NULL)
+void	ft_loop_format(const char *str, t_counter *cnt, t_operation *ops)
+{
+	int			i;
+	t_format	*fmt;
+
+	i = cnt->total;
+	while (*(str + i) != '\0')
+	{
+		if (*(str + i) == '%')
+		{
+			fmt = ft_format_new();
+			if (fmt == NULL)
 				break ;
-			// i += ft_get_format((char *)format + i, );
-			// ft_evaluate_array(operations, i, )
+			fmt->index = &i;
+			ft_check_conversion(str, fmt, ops);
+			ft_get_format(cnt, fmt, ops);
+			if (ft_check_total(cnt, fmt->length))
+			{
+				ft_putstr((char *)fmt->print);
+				ft_safer_free((void **)&fmt);
+				continue ;
+			}
+			else
+			{
+				ft_safer_free((void **)&fmt);
+				break ;
+			}
 		}
 		else
-			ft_putchar(c);
+			if (ft_check_total(cnt, 1))
+				ft_putchar(*(str + i));
 		i++;
 	}
 }
 
 int	ft_printf(const char *format, ...)
 {
+	int			res;
 	va_list		ap;
-	t_counter	*counter;
+	t_counter	*cnt;
 	t_operation	operations[128];
 
 	if (format == NULL)
 		return (0);
-	counter = ft_counternew();
-	if (counter == NULL)
-		return (-1);
-	initialize_queue(counter->head);
-	ft_initialize_operations_array(operations);
 	va_start(ap, format);
-	ft_loop_format(format, ap, counter, operations);
+	cnt = ft_counter_new(ap);
+	if (cnt == NULL)
+		return (-1);
+	ft_initialize_operations_array(operations);
+	ft_loop_format(format, cnt, operations);
 	va_end(ap);
-	return (counter->total);
+	res = cnt->total;
+	ft_safer_free((void **)&cnt);
+	return (res);
 }

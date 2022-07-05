@@ -6,11 +6,11 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:06:09 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/06/21 10:52:18 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/05 20:34:42 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_node.h"
+#include "ft_printf.h"
 
 void	initialize_list(t_linked_list *list)
 {
@@ -91,17 +91,4 @@ t_node	*get_node(t_linked_list *list, int (*compare)(void *d1, void *d2), \
 		node = node->next;
 	}
 	return (NULL);
-}
-
-void	display_linked_list(t_linked_list *list, \
-	void (*display)(t_linked_list *list))
-{
-	t_node	*current;
-
-	current = list->head;
-	while (current != NULL)
-	{
-		display(current);
-		current = current->next;
-	}
 }

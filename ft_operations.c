@@ -6,50 +6,50 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 15:28:23 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/06/08 22:19:11 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/05 21:38:15 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
 
-void	ft_test(t_format node)
+void	ft_initialize_operations_array(t_operation *ops)
 {
-	return ;
+	ops['c'] = ft_type_char;
+	ops['s'] = ft_type_string;
+	ops['p'] = ft_type_pointer;
+	ops['d'] = ft_type_decimal;
+	ops['i'] = ft_type_integer;
+	ops['u'] = ft_type_usigned_decial;
+	ops['x'] = ft_type_lower_hexadecimal;
+	ops['X'] = ft_type_upper_hexadecimal;
+	ops['%'] = ft_type_percent;
+	ops['-'] = ft_flag_minus;
+	ops['0'] = ft_flag_zero;
+	ops['.'] = ft_calc_precision;
+	ops['#'] = ft_flag_sharp;
+	ops[' '] = ft_flag_blank;
+	ops['+'] = ft_flag_plus;
+	ops['w'] = ft_calc_width;
 }
 
-void	ft_initialize_operations_array(t_operation *operations)
+// 함께 쓰이는 플래그들 처리하는 용도
+void	ft_check_operation(t_counter *cnt, t_format *fmt, t_operation *ops, t_operation *op)
 {
-	operations[D_CHARACTER] = ft_test;
-	operations[D_STRING] = ft_test;
-	operations[D_POINTER] = ft_test;
-	operations[D_DECIMAL] = ft_test;
-	operations[D_INTEGER] = ft_test;
-	operations[D_UN_DECIMAL] = ft_test;
-	operations[D_LOWER_HEXA] = ft_test;
-	operations[D_UPPER_HEXA] = ft_test;
-	operations[D_PERCENT] = ft_test;
-	operations[D_MINUS] = ft_test;
-	operations[D_ZERO] = ft_test;
-	operations[D_DOT] = ft_test;
-	operations[D_SHARP] = ft_test;
-	operations[D_BLANK] = ft_test;
-	operations[D_PLUS] = ft_test;
+	if (*op == ops['0'] && fmt->option->flags->minus)
+		return ;
+	(*op)(cnt, fmt);
 }
 
-t_format	ft_evaluate_array(t_operation *operations, t_format *format)
+void	ft_get_format(t_counter *cnt, t_format *fmt, t_operation *ops)
 {
-	t_operation	operation;
+	t_operation	*op;
 
-	operation = operations[format->flags];
-	return (operation(format, format->value));
+	while (fmt->operations->head != NULL)
+	{
+		op = (t_operation *)pop(fmt->operations);
+		if (op == NULL)
+			break ;
+		ft_check_operation(cnt, fmt, ops, op);
+	}
 }
 
-// char 리터럴은 int형태임 sizeof('a') == 4
-void	ft_format_c(va_list ap, t_format *format)
-{
-	char	arg;
-
-	arg = (char)va_arg(ap, int);
-	format->value = &arg;
-}

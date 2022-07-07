@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:15:30 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/05 21:58:36 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/07 23:12:36 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_check_flags(const char *str, t_format *fmt, t_operation *ops)
 {
 	unsigned char	c;
 
-	c = *(str + (*(fmt->index)));
+	c = ft_getchar(str, fmt);
 	if (c != '\0' && ft_strchr("-+0 #", c) != NULL)
 	{
 		// TODO 일단 중복되게 넣어보고 문제가 되면 검증하는 로직 추가
@@ -30,7 +30,7 @@ void	ft_check_flags(const char *str, t_format *fmt, t_operation *ops)
 			fmt->option->flags->blank = 1;
 		else if (c == '#')
 			fmt->option->flags->sharp = 1;
-		push(fmt->operations, ops[c]);
+		push(fmt->operations, &ops[c]);
 		*(fmt->index) += 1;
 		ft_check_flags(str, fmt, ops);
 	}
@@ -38,30 +38,25 @@ void	ft_check_flags(const char *str, t_format *fmt, t_operation *ops)
 
 void	ft_check_width(const char *str, t_format *fmt, t_operation *ops)
 {
-	char	c;
 	int		width;
 
-	c = *str;
-	width = 0;
-	fmt->option->width = 1;
-	// TODO 0 부터 시작되는건 flag다.
-	// if (c != '\0' && (c != '0' && ft_isdigit(c)))
-	if (c != '\0' && ft_isdigit(c))
-		width = ft_get_width((char *)str);
+	width = ft_get_width(str, fmt);
 	if (!width)
 		width = ft_strlen(fmt->value);
-	push(fmt->operations, ops['w']);
+	fmt->option->width = width;
+	push(fmt->operations, &ops['w']);
 }
 
 void	ft_check_precision(const char *str, t_format *fmt, t_operation *ops)
 {
 	char	c;
 
-	c = *str;
+	c = ft_getchar(str, fmt);
 	if (c != '\0' && c == '.')
 	{
-		fmt->option->precision = ft_get_precision(str + 1);
-		push(fmt->operations, ops['.']);
+		*(fmt->index) += 1;
+		fmt->option->precision = ft_get_precision(str, fmt);
+		push(fmt->operations, &ops['.']);
 	}
 }
 
@@ -69,25 +64,31 @@ void	ft_check_type(const char *str, t_format *fmt, t_operation *ops)
 {
 	unsigned char	c;
 
-	c = *str;
+	c = ft_getchar(str, fmt);
 	fmt->type = c;
-	push(fmt->operations, ops[c]);
-	// if (c == 'c')
-	// 	push(fmt->operations, ops['c']);
-	// else if (c == 's')
-	// 	push(fmt->operations, ops['s']);
-	// else if (c == 'p')
-	// 	push(fmt->operations, ops['p']);
-	// else if (c == 'd')
-	// 	push(fmt->operations, ops['d']);
-	// else if (c == 'i')
-	// 	push(fmt->operations, ops['i']);
-	// else if (c == 'u')
-	// 	push(fmt->operations, ops['u']);
-	// else if (c == 'x')
-	// 	push(fmt->operations, ops['x']);
-	// else if (c == 'X')
-	// 	push(fmt->operations, ops['X']);
-	// else if (c == '%')
-	// 	push(fmt->operations, ops['%']);
+	*(fmt->index) += 1;
+	// push(fmt->operations, &ops[c]);
+	if (c == 'c')
+		push(fmt->operations, &ops['c']);
+	else if (c == 's')
+		push(fmt->operations, &ops['s']);
+	else if (c == 'p')
+		push(fmt->operations, &ops['p']);
+	else if (c == 'd')
+		push(fmt->operations, &ops['d']);
+	else if (c == 'i')
+		push(fmt->operations, &ops['i']);
+	else if (c == 'u')
+		push(fmt->operations, &ops['u']);
+	else if (c == 'x')
+		push(fmt->operations, &ops['x']);
+	else if (c == 'X')
+		push(fmt->operations, &ops['X']);
+	else if (c == '%')
+		push(fmt->operations, &ops['%']);
+	else // TODO 지우기
+	{
+		ft_putstr("Error");
+		ft_putchar(c);
+	}
 }

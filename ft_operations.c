@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 15:28:23 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/05 21:38:15 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/07 22:00:37 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 void	ft_initialize_operations_array(t_operation *ops)
 {
+	int	i;
+
+	i = 0;
+	while (i < 128)
+		ops[i++] = NULL;
 	ops['c'] = ft_type_char;
 	ops['s'] = ft_type_string;
 	ops['p'] = ft_type_pointer;
 	ops['d'] = ft_type_decimal;
 	ops['i'] = ft_type_integer;
-	ops['u'] = ft_type_usigned_decial;
+	ops['u'] = ft_type_usigned_decimal;
 	ops['x'] = ft_type_lower_hexadecimal;
 	ops['X'] = ft_type_upper_hexadecimal;
 	ops['%'] = ft_type_percent;

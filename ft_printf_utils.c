@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:47:52 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/06/08 20:50:07 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/07 23:20:24 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_safer_free(void **ptr)
 
 void	ft_putchar(char c)
 {
-	write(1, &c, 1);
+	write(STDOUT_FILENO, &c, 1);
 }
 
 void	ft_putstr(char *s)
@@ -34,3 +34,14 @@ void	ft_putstr(char *s)
 	s_len = ft_strlen(s);
 	write(1, s, s_len + 1);
 }
+
+char	ft_getchar(const char *str, t_format *fmt)
+{
+	int		i;
+	char	c;
+
+	i = *(fmt->index);
+	c = *(str + i);
+	return (c);
+}
+

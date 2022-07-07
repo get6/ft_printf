@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:26:33 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/05 16:25:18 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/07 23:23:43 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_loop_format(const char *str, t_counter *cnt, t_operation *ops)
 	{
 		if (*(str + i) == '%')
 		{
+			i++;
 			fmt = ft_format_new();
 			if (fmt == NULL)
 				break ;

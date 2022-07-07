@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 16:41:13 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/05 21:00:31 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/07 22:17:17 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ void	ft_calc_width(t_counter *cnt, t_format *fmt);
 // ft_precision.c
 void	ft_calc_precision(t_counter *cnt, t_format *fmt);
 
-// ft_type.c
+// ft_type1.c
 void	ft_type_char(t_counter *cnt, t_format *fmt);
 void	ft_type_string(t_counter *cnt, t_format *fmt);
 void	ft_type_pointer(t_counter *cnt, t_format *fmt);
 void	ft_type_decimal(t_counter *cnt, t_format *fmt);
 void	ft_type_integer(t_counter *cnt, t_format *fmt);
-void	ft_type_usigned_decial(t_counter *cnt, t_format *fmt);
+
+// ft_type2.c
+void	ft_type_usigned_decimal(t_counter *cnt, t_format *fmt);
 void	ft_type_lower_hexadecimal(t_counter *cnt, t_format *fmt);
 void	ft_type_upper_hexadecimal(t_counter *cnt, t_format *fmt);
 void	ft_type_percent(t_counter *cnt, t_format *fmt);

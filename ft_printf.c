@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:26:33 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/07 23:23:43 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/08 12:35:29 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_loop_format(const char *str, t_counter *cnt, t_operation *ops)
 			ft_get_format(cnt, fmt, ops);
 			if (ft_check_total(cnt, fmt->length))
 			{
-				ft_putstr((char *)fmt->print);
+				ft_putstr(fmt->print);
 				ft_safer_free((void **)&fmt);
 				continue ;
 			}

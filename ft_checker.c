@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:15:30 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/07 23:12:36 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/08 12:30:01 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	ft_check_width(const char *str, t_format *fmt, t_operation *ops)
 	int		width;
 
 	width = ft_get_width(str, fmt);
-	if (!width)
-		width = ft_strlen(fmt->value);
 	fmt->option->width = width;
 	push(fmt->operations, &ops['w']);
 }

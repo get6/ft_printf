@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:26:31 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/07 22:44:26 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/08 14:16:26 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,8 @@ t_format	*ft_format_new(void);
 
 // ft_type2.c
 char	*ft_char_to_string(char c);
+
+// ft_type3.c
+int		ft_is_same_type(t_format *fmt, char c);
 
 #endif

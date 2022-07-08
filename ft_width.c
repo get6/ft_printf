@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:22 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/07 22:43:57 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/08 13:47:09 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,24 @@ int	ft_get_width(const char *str, t_format *fmt)
 
 void	ft_calc_width(t_counter *cnt, t_format *fmt)
 {
+	int		width;
+	int		length;
+	char	*str;
+
 	(void)cnt;
-	(void)fmt;
+	if (!fmt->option->width)
+		fmt->option->width = ft_strlen(fmt->print);
+	width = fmt->option->width;
+	length = ft_strlen(fmt->print);
+	if (width < length)
+		width = length;
+	fmt->length = width;
+	str = (char *)malloc(sizeof(char) * width + 1);
+	if (str == NULL)
+		return ;
+	ft_memset(str, ' ', width);
+	ft_memcpy(str + (width - length), fmt->print, length);
+	*(str + width) = '\0';
+	free(fmt->print);
+	fmt->print = str;
 }

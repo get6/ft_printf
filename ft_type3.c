@@ -1,47 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_type3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 14:47:52 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/08 12:41:05 by sunhwang         ###   ########.fr       */
+/*   Created: 2022/07/08 14:15:05 by sunhwang          #+#    #+#             */
+/*   Updated: 2022/07/08 14:16:03 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_safer_free(void **ptr)
+int	ft_is_same_type(t_format *fmt, char c)
 {
-	if (ptr == NULL || *ptr == NULL)
-		return ;
-	free(*ptr);
-	*ptr = NULL;
+	return (fmt->type == c);
 }
-
-void	ft_putchar(char c)
-{
-	write(STDOUT_FILENO, &c, 1);
-}
-
-void	ft_putstr(char *s)
-{
-	int	s_len;
-
-	if (s == NULL)
-		return ;
-	s_len = ft_strlen(s);
-	write(1, s, s_len);
-}
-
-char	ft_getchar(const char *str, t_format *fmt)
-{
-	int		i;
-	char	c;
-
-	i = *(fmt->index);
-	c = *(str + i);
-	return (c);
-}
-

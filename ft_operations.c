@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 15:28:23 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/07 22:00:37 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/08 12:42:28 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	ft_initialize_operations_array(t_operation *ops)
 }
 
 // 함께 쓰이는 플래그들 처리하는 용도
-void	ft_check_operation(t_counter *cnt, t_format *fmt, t_operation *ops, t_operation *op)
+void	ft_check_operation(t_counter *cnt, t_format *fmt, t_operation *ops, \
+t_operation *op)
 {
 	if (*op == ops['0'] && fmt->option->flags->minus)
 		return ;
@@ -57,4 +58,3 @@ void	ft_get_format(t_counter *cnt, t_format *fmt, t_operation *ops)
 		ft_check_operation(cnt, fmt, ops, op);
 	}
 }
-

@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:20 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/07 22:37:32 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/08 14:08:24 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,19 @@ void	ft_type_string(t_counter *cnt, t_format *fmt)
 {
 	char	*arg;
 	va_list	ap;
+	int		arg_len;
 
 	ap = cnt->ap;
 	arg = va_arg(ap, char *);
-	fmt->value = (char *)malloc(sizeof(char) * ft_strlen(arg));
+	arg_len = ft_strlen(arg);
+	fmt->value = (char *)malloc(sizeof(char) * (arg_len + 1));
 	if (fmt->value == NULL)
 		return ;
-	ft_strlcpy(fmt->value, arg, sizeof(arg));
-	fmt->print = (char *)malloc(sizeof(char) * ft_strlen(arg));
+	ft_strlcpy(fmt->value, arg, arg_len + 1);
+	fmt->print = (char *)malloc(sizeof(char) * (arg_len + 1));
 	if (fmt->print == NULL)
 		return ;
-	ft_strlcpy(fmt->print, arg, sizeof(arg));
+	ft_strlcpy(fmt->print, arg, arg_len + 1);
 	fmt->length = ft_strlen(fmt->print);
 }
 

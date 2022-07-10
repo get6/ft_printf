@@ -6,10 +6,9 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 16:41:13 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/07 22:17:17 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/08 19:41:32 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef FT_OPERATIONS_H
 # define FT_OPERATIONS_H

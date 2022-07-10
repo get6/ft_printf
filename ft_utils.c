@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:47:52 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/08 12:41:05 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/09 22:35:18 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_putstr(char *s)
 	if (s == NULL)
 		return ;
 	s_len = ft_strlen(s);
-	write(1, s, s_len);
+	write(STDOUT_FILENO, s, s_len);
 }
 
 char	ft_getchar(const char *str, t_format *fmt)
@@ -45,3 +45,28 @@ char	ft_getchar(const char *str, t_format *fmt)
 	return (c);
 }
 
+static void	ft_recursive_putnbr(char **str, size_t n, char *base, int s_len)
+{
+	int	b_len;
+
+	b_len = ft_strlen(base);
+	if (n == 0)
+	{
+		*str = (char *)malloc(s_len + 1);
+		if (*str == NULL)
+			return ;
+		*(*str + s_len) = '\0';
+	}
+	ft_recursive_putnbr(str, n / b_len, base, s_len + 1);
+	if (*str == NULL)
+		return ;
+	*(*str + s_len) = '0' + *(base + (n % b_len));
+}
+
+char	*ft_putnbr_base(size_t nbr, char *base)
+{
+	char	*res;
+
+	ft_recursive_putnbr(&res, nbr, base, 1);
+	return (res);
+}

@@ -6,12 +6,14 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 20:53:42 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/07 18:03:38 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/09 19:35:46 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_STRUCT_H
 # define FT_STRUCT_H
+
+# include <stdarg.h>
 
 typedef struct s_node
 {
@@ -40,7 +42,7 @@ typedef struct s_flag
 typedef struct s_counter
 {
 	int		total;
-	va_list	ap;
+	va_list	*ap;
 }	t_counter;
 
 typedef struct s_option
@@ -50,11 +52,9 @@ typedef struct s_option
 	char	precision;
 }	t_option;
 
-
 typedef struct s_format
 {
-	void		*value;
-	void		*print;
+	char		*print;
 	int			*index;
 	int			length;
 	char		type;

@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:12 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/08 19:16:10 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/09 19:41:07 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,15 @@ void	ft_flag_minus(t_counter *cnt, t_format *fmt)
 	int		start;
 	char	*str;
 
-
 	(void)cnt;
 	length = ft_strlen(fmt->print);
-	str = (char *)malloc(sizeof(char) * (length + 1));
+	str = (char *)malloc(length + 1);
 	if (str == NULL)
 		return ;
 	start = 0;
-	while (*((char *)fmt->print + start) != '\0')
+	while (*(fmt->print + start) != '\0')
 	{
-		if (*((char *)fmt->print + start) == ' ')
+		if (*(fmt->print + start) == ' ')
 			start++;
 		else
 			break ;
@@ -45,12 +44,14 @@ void	ft_flag_zero(t_counter *cnt, t_format *fmt)
 	char	c;
 
 	(void)cnt;
-	i = fmt->option->width - fmt->option->precision;
-	while (*((char *)fmt->print + i) != '\0')
+	i = 0;
+	if (fmt->option->precision)
+		i = fmt->option->width - fmt->option->precision;
+	while (*(fmt->print + i) != '\0')
 	{
-		c = *((char *)fmt->print + i);
+		c = *(fmt->print + i);
 		if (c == ' ')
-			*((char *)fmt->print + i) = '0';
+			*(fmt->print + i) = '0';
 		else
 			break ;
 		i++;

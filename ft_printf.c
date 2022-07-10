@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:26:33 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/08 12:35:29 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/08 22:39:40 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ void	ft_loop_format(const char *str, t_counter *cnt, t_operation *ops)
 			if (ft_check_total(cnt, fmt->length))
 			{
 				ft_putstr(fmt->print);
-				ft_safer_free((void **)&fmt);
+				ft_format_free(fmt);
 				continue ;
 			}
 			else
 			{
-				ft_safer_free((void **)&fmt);
+				ft_format_free(fmt);
 				break ;
 			}
 		}
@@ -78,7 +78,7 @@ int	ft_printf(const char *format, ...)
 	if (format == NULL)
 		return (0);
 	va_start(ap, format);
-	cnt = ft_counter_new(ap);
+	cnt = ft_counter_new(&ap);
 	if (cnt == NULL)
 		return (-1);
 	ft_initialize_operations_array(operations);

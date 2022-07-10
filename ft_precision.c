@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:15 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/08 15:15:08 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/09 19:41:21 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_precision_string(t_format *fmt)
 	length = ft_strlen(fmt->print);
 	if (precision < length)
 	{
-		str = (char *)malloc(sizeof(char) * (precision + 1));
+		str = (char *)malloc(precision + 1);
 		if (str == NULL)
 			return ;
 		ft_strlcpy(str, fmt->print, precision + 1);
@@ -59,7 +59,7 @@ void	ft_precision_number(t_format *fmt)
 	length = ft_strlen(fmt->print);
 	if (length < precision)
 	{
-		str = (char *)malloc(sizeof(char) * (precision + 1));
+		str = (char *)malloc(precision + 1);
 		if (str == NULL)
 			return ;
 		ft_memset(str, '0', precision);
@@ -72,7 +72,6 @@ void	ft_precision_number(t_format *fmt)
 
 void	ft_calc_precision(t_counter *cnt, t_format *fmt)
 {
-
 	(void)cnt;
 	if (ft_is_same_type(fmt, 's'))
 		ft_precision_string(fmt);
@@ -83,4 +82,3 @@ void	ft_calc_precision(t_counter *cnt, t_format *fmt)
 	else
 		fmt->option->precision = -1;
 }
-

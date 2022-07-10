@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_struct.c                                        :+:      :+:    :+:   */
+/*   ft_struct1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 18:34:05 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/05 22:05:29 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/09 19:36:27 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_counter	*ft_counter_new(va_list ap)
+t_counter	*ft_counter_new(va_list *ap)
 {
 	t_counter	*new;
 
@@ -24,7 +24,7 @@ t_counter	*ft_counter_new(va_list ap)
 	return (new);
 }
 
-t_flag	*ft_flag_new(void)
+static t_flag	*ft_flag_new(void)
 {
 	t_flag	*new;
 
@@ -39,7 +39,7 @@ t_flag	*ft_flag_new(void)
 	return (new);
 }
 
-t_option	*ft_optional_new(void)
+static t_option	*ft_optional_new(void)
 {
 	t_option	*new;
 
@@ -57,7 +57,7 @@ t_option	*ft_optional_new(void)
 	return (new);
 }
 
-t_stack	*ft_stack_new(void)
+static t_stack	*ft_stack_new(void)
 {
 	t_stack	*new;
 
@@ -88,7 +88,6 @@ t_format	*ft_format_new(void)
 		ft_safer_free((void **)&new);
 		return (NULL);
 	}
-	new->value = NULL;
 	new->print = NULL;
 	new->index = NULL;
 	new->length = 0;

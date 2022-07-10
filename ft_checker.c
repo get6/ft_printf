@@ -6,12 +6,13 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:15:30 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/08 12:30:01 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/08 19:40:21 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+// TODO 일단 중복되게 넣어보고 문제가 되면 검증하는 로직 추가
 void	ft_check_flags(const char *str, t_format *fmt, t_operation *ops)
 {
 	unsigned char	c;
@@ -19,7 +20,6 @@ void	ft_check_flags(const char *str, t_format *fmt, t_operation *ops)
 	c = ft_getchar(str, fmt);
 	if (c != '\0' && ft_strchr("-+0 #", c) != NULL)
 	{
-		// TODO 일단 중복되게 넣어보고 문제가 되면 검증하는 로직 추가
 		if (c == '-')
 			fmt->option->flags->minus = 1;
 		else if (c == '+')
@@ -65,7 +65,6 @@ void	ft_check_type(const char *str, t_format *fmt, t_operation *ops)
 	c = ft_getchar(str, fmt);
 	fmt->type = c;
 	*(fmt->index) += 1;
-	// push(fmt->operations, &ops[c]);
 	if (c == 'c')
 		push(fmt->operations, &ops['c']);
 	else if (c == 's')
@@ -84,9 +83,4 @@ void	ft_check_type(const char *str, t_format *fmt, t_operation *ops)
 		push(fmt->operations, &ops['X']);
 	else if (c == '%')
 		push(fmt->operations, &ops['%']);
-	else // TODO 지우기
-	{
-		ft_putstr("Error");
-		ft_putchar(c);
-	}
 }

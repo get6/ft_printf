@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:22 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/09 19:41:43 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/10 18:55:24 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,14 @@ void	ft_calc_width(t_counter *cnt, t_format *fmt)
 
 	(void)cnt;
 	if (!fmt->option->width)
-		fmt->option->width = ft_strlen(fmt->print);
+		fmt->option->width = fmt->length;
+	if (ft_is_nul(fmt))
+	{
+		fmt->option->width--;
+		fmt->length--;
+	}
 	width = fmt->option->width;
-	length = ft_strlen(fmt->print);
+	length = fmt->length;
 	if (width < length)
 		width = length;
 	fmt->length = width;

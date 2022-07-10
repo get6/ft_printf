@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 20:53:42 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/09 19:35:46 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/10 15:16:26 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_option
 
 typedef struct s_format
 {
+	void		*value;
 	char		*print;
 	int			*index;
 	int			length;

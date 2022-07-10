@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:15 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/09 19:41:21 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/10 22:21:52 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_precision_string(t_format *fmt)
 	char	*str;
 
 	precision = fmt->option->precision;
-	length = ft_strlen(fmt->print);
+	length = fmt->length;
 	if (precision < length)
 	{
 		str = (char *)malloc(precision + 1);
@@ -46,27 +46,34 @@ void	ft_precision_string(t_format *fmt)
 		ft_strlcpy(str, fmt->print, precision + 1);
 		free(fmt->print);
 		fmt->print = str;
+		fmt->length = ft_strlen(str);
 	}
 }
 
 void	ft_precision_number(t_format *fmt)
 {
+	int		neg;
 	int		precision;
 	int		length;
 	char	*str;
 
 	precision = fmt->option->precision;
-	length = ft_strlen(fmt->print);
+	length = fmt->length;
 	if (length < precision)
 	{
-		str = (char *)malloc(precision + 1);
+		neg = ft_is_negative(fmt);
+		length -= neg;
+		str = (char *)malloc(precision + 1 + neg);
 		if (str == NULL)
 			return ;
-		ft_memset(str, '0', precision);
-		ft_memcpy(str + (precision - length), fmt->print, length);
-		*(str + precision) = '\0';
+		ft_memset(str + neg, '0', precision - length);
+		ft_memcpy(str + neg + precision - length, fmt->print + neg, length);
+		if (neg)
+			*str = '-';
+		*(str + precision + neg) = '\0';
 		free(fmt->print);
 		fmt->print = str;
+		fmt->length = ft_strlen(str);
 	}
 }
 

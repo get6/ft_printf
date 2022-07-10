@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:54:24 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/09 22:18:49 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/10 16:10:46 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 void	ft_type_usigned_decimal(t_counter *cnt, t_format *fmt)
 {
-	int	arg;
+	unsigned int	arg;
 
 	arg = va_arg(*(cnt->ap), int);
+	fmt->value = (unsigned int *)malloc(sizeof(unsigned int));
+	if (fmt->value == NULL)
+		return ;
+	*((unsigned int *)fmt->value) = arg;
 	fmt->print = ft_putnbr_base(arg, "0123456789");
 	if (fmt->print == NULL)
 		return ;
@@ -28,6 +32,10 @@ void	ft_type_lower_hexadecimal(t_counter *cnt, t_format *fmt)
 	int	arg;
 
 	arg = va_arg(*(cnt->ap), int);
+	fmt->value = (int *)malloc(sizeof(int));
+	if (fmt->value == NULL)
+		return ;
+	*((int *)fmt->value) = arg;
 	fmt->print = ft_putnbr_base(arg, "0123456789abcdef");
 	if (fmt->print == NULL)
 		return ;
@@ -39,6 +47,10 @@ void	ft_type_upper_hexadecimal(t_counter *cnt, t_format *fmt)
 	int	arg;
 
 	arg = va_arg(*(cnt->ap), int);
+	fmt->value = (int *)malloc(sizeof(int));
+	if (fmt->value == NULL)
+		return ;
+	*((int *)fmt->value) = arg;
 	fmt->print = ft_putnbr_base(arg, "0123456789ABCDEF");
 	if (fmt->print == NULL)
 		return ;
@@ -48,6 +60,10 @@ void	ft_type_upper_hexadecimal(t_counter *cnt, t_format *fmt)
 void	ft_type_percent(t_counter *cnt, t_format *fmt)
 {
 	(void)cnt;
+	fmt->value = (char *)malloc(1);
+	if (fmt->value == NULL)
+		return ;
+	*((char *)fmt->value) = '%';
 	fmt->print = ft_char_to_string('%');
 	if (fmt->print == NULL)
 		return ;

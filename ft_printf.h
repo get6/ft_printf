@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:26:31 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/09 22:07:55 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/10 22:33:56 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ void		ft_safer_free(void **ptr);
 void		ft_putchar(char c);
 void		ft_putstr(char *s);
 char		ft_getchar(const char *str, t_format *fmt);
-char		*ft_putnbr_base(size_t nbr, char *base);
+char		*ft_putnbr_base(long long nbr, char *base);
+int			ft_is_negative(t_format *fmt);
 
 // ft_operations.c
 void		ft_initialize_operations_array(t_operation *ops);
-void		ft_get_format(t_counter *cnt, t_format *fmt, t_operation *ops);
+void		ft_get_format(t_counter *cnt, t_format *fmt);
 
 // ft_checker.c
 void		ft_check_flags(const char *str, t_format *fmt, t_operation *ops);
@@ -60,5 +61,6 @@ char		*ft_char_to_string(char c);
 
 // ft_type3.c
 int			ft_is_same_type(t_format *fmt, char c);
+int			ft_is_nul(t_format *fmt);
 
 #endif

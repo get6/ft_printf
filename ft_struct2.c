@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 18:34:05 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/09 19:36:39 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/10 15:19:31 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	ft_format_free(t_format *fmt)
 {
 	if (fmt == NULL)
 		return ;
+	if (fmt->value != NULL)
+		ft_safer_free((void **)&fmt->value);
 	if (fmt->print != NULL)
 		ft_safer_free((void **)&fmt->print);
 	if (fmt->option != NULL)

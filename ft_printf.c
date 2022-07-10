@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:26:33 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/08 22:39:40 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/10 22:34:35 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,40 @@ int	ft_check_total(t_counter *cnt, int length)
 	return (1);
 }
 
+int	ft_handle_format(const char *str, t_counter *cnt, t_format *fmt, \
+t_operation *ops)
+{
+	ft_check_conversion(str, fmt, ops);
+	ft_get_format(cnt, fmt);
+	if (ft_check_total(cnt, fmt->length))
+	{
+		if (ft_is_same_type(fmt, 'c') && *((char *)fmt->value) == '\0')
+		{
+			if (fmt->option->flags->minus)
+			{
+				ft_putchar(*((char *)fmt->value));
+				ft_putstr(fmt->print);
+			}
+			else
+			{
+				ft_putstr(fmt->print);
+				ft_putchar(*((char *)fmt->value));
+			}
+		}
+		else
+			ft_putstr(fmt->print);
+		ft_format_free(fmt);
+		return (1);
+	}
+	else
+		ft_format_free(fmt);
+	return (0);
+}
+
 void	ft_loop_format(const char *str, t_counter *cnt, t_operation *ops)
 {
 	int			i;
+	int			res;
 	t_format	*fmt;
 
 	i = cnt->total;
@@ -47,19 +78,11 @@ void	ft_loop_format(const char *str, t_counter *cnt, t_operation *ops)
 			if (fmt == NULL)
 				break ;
 			fmt->index = &i;
-			ft_check_conversion(str, fmt, ops);
-			ft_get_format(cnt, fmt, ops);
-			if (ft_check_total(cnt, fmt->length))
-			{
-				ft_putstr(fmt->print);
-				ft_format_free(fmt);
+			res = ft_handle_format(str, cnt, fmt, ops);
+			if (res == 1)
 				continue ;
-			}
 			else
-			{
-				ft_format_free(fmt);
 				break ;
-			}
 		}
 		else
 			if (ft_check_total(cnt, 1))

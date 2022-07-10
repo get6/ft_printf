@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 15:28:23 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/08 12:42:28 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/10 22:33:41 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,13 @@ void	ft_initialize_operations_array(t_operation *ops)
 	ops['w'] = ft_calc_width;
 }
 
-// 함께 쓰이는 플래그들 처리하는 용도
-void	ft_check_operation(t_counter *cnt, t_format *fmt, t_operation *ops, \
-t_operation *op)
+// TODO 함께 쓰이는 플래그들 처리하는 용도
+void	ft_check_operation(t_counter *cnt, t_format *fmt, t_operation *op)
 {
-	if (*op == ops['0'] && fmt->option->flags->minus)
-		return ;
 	(*op)(cnt, fmt);
 }
 
-void	ft_get_format(t_counter *cnt, t_format *fmt, t_operation *ops)
+void	ft_get_format(t_counter *cnt, t_format *fmt)
 {
 	t_operation	*op;
 
@@ -55,6 +52,6 @@ void	ft_get_format(t_counter *cnt, t_format *fmt, t_operation *ops)
 		op = (t_operation *)pop(fmt->operations);
 		if (op == NULL)
 			break ;
-		ft_check_operation(cnt, fmt, ops, op);
+		ft_check_operation(cnt, fmt, op);
 	}
 }

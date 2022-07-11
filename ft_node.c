@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:06:09 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/05 20:34:42 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/11 13:11:29 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,4 @@ void	delete_node(t_linked_list *list, t_node *node)
 			list->tail = tmp;
 	}
 	free(node);
-}
-
-t_node	*get_node(t_linked_list *list, int (*compare)(void *d1, void *d2), \
-	void *data)
-{
-	t_node	*node;
-
-	node = list->head;
-	while (node != NULL)
-	{
-		if (compare(node->data, data) == 0)
-			return (node);
-		node = node->next;
-	}
-	return (NULL);
 }

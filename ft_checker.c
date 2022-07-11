@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:15:30 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/08 19:40:21 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/11 13:09:56 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,7 @@ void	ft_check_type(const char *str, t_format *fmt, t_operation *ops)
 		push(fmt->operations, &ops['X']);
 	else if (c == '%')
 		push(fmt->operations, &ops['%']);
+	// 4개말고 더 있을 수 있음
+	if (c == 'd' || c == 'i' || c == 'x' || c == 'X')
+		appendleft(fmt->operations, &ops['m']);
 }

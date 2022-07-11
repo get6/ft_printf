@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:15:00 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/04 20:47:30 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/11 12:59:31 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ void	initialize_stack(t_stack *stack)
 void	push(t_stack *stack, void *data)
 {
 	add_head(stack, data);
+}
+
+void	appendleft(t_stack *stack, void *data)
+{
+	add_tail(stack, data);
 }
 
 void	*pop(t_stack *stack)

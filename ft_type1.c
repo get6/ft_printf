@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:20 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/10 21:13:59 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/11 13:04:36 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ void	ft_type_pointer(t_counter *cnt, t_format *fmt)
 	fmt->print = dst;
 	fmt->length = ft_strlen(fmt->print);
 }
-
-
 
 void	ft_type_decimal(t_counter *cnt, t_format *fmt)
 {

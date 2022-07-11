@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:47:52 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/10 22:22:05 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/11 13:06:09 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*ft_putnbr_base(long long nbr, char *base)
 	return (res);
 }
 
-int	ft_is_negative(t_format *fmt)
+int	ft_is_minus(t_format *fmt)
 {
 	int	minus;
 

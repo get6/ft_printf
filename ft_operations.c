@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 15:28:23 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/10 22:33:41 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/11 13:10:59 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ void	ft_initialize_operations_array(t_operation *ops)
 	ops[' '] = ft_flag_blank;
 	ops['+'] = ft_flag_plus;
 	ops['w'] = ft_calc_width;
+	ops['m'] = ft_calc_minus;
 }
 
 // TODO 함께 쓰이는 플래그들 처리하는 용도
-void	ft_check_operation(t_counter *cnt, t_format *fmt, t_operation *op)
+static void	ft_check_operation(t_counter *cnt, t_format *fmt, t_operation *op)
 {
 	(*op)(cnt, fmt);
 }

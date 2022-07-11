@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:26:31 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/11 13:06:49 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/11 15:23:34 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void		ft_putstr(char *s);
 char		ft_getchar(const char *str, t_format *fmt);
 char		*ft_putnbr_base(long long nbr, char *base);
 int			ft_is_minus(t_format *fmt);
+char		*ft_delete_minus(int n);
 
 // ft_operations.c
 void		ft_initialize_operations_array(t_operation *ops);

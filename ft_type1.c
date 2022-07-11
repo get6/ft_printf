@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:20 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/11 13:04:36 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/11 15:23:45 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ft_type_decimal(t_counter *cnt, t_format *fmt)
 	if (fmt->value == NULL)
 		return ;
 	*((int *)fmt->value) = arg;
-	fmt->print = ft_itoa(arg);
+	fmt->print = ft_delete_minus(arg);
 	if (fmt->print == NULL)
 		return ;
 	fmt->length = ft_strlen(fmt->print);
@@ -96,7 +96,7 @@ void	ft_type_integer(t_counter *cnt, t_format *fmt)
 	if (fmt->value == NULL)
 		return ;
 	*((int *)fmt->value) = arg;
-	fmt->print = ft_itoa(arg);
+	fmt->print = ft_delete_minus(arg);
 	if (fmt->print == NULL)
 		return ;
 	fmt->length = ft_strlen(fmt->print);

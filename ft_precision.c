@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:15 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/11 13:18:52 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/11 17:06:32 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ void	ft_precision_number(t_format *fmt)
 
 	precision = fmt->option->precision;
 	length = fmt->length;
+	if (!precision && *((int *)fmt->value) == 0)
+	{
+		*fmt->print = '\0';
+		fmt->length -= 1;
+		return ;
+	}
 	if (length < precision)
 	{
 		str = (char *)malloc(precision + 1);
@@ -81,6 +87,4 @@ void	ft_calc_precision(t_counter *cnt, t_format *fmt)
 	|| ft_is_same_type(fmt, 'u') || ft_is_same_type(fmt, 'x') \
 	|| ft_is_same_type(fmt, 'X'))
 		ft_precision_number(fmt);
-	else
-		fmt->option->precision = -1;
 }

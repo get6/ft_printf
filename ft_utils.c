@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:47:52 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/11 14:43:25 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/11 17:20:56 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,13 @@ int	ft_is_minus(t_format *fmt)
 	else if (ft_is_same_type(fmt, 'u'))
 		minus = *((unsigned int *)fmt->value) < 0;
 	else if (ft_is_same_type(fmt, 'x') || ft_is_same_type(fmt, 'X'))
-		minus = *((long long *)fmt->value) < 0;
+		minus = *((unsigned int *)fmt->value) < 0;
 	return (minus);
 }
 
 char	*ft_delete_minus(int n)
 {
+	int		str_len;
 	char	*res;
 	char	*str;
 
@@ -109,10 +110,10 @@ char	*ft_delete_minus(int n)
 		return (NULL);
 	if (0 <= n)
 		return (str);
-	res = (char *)malloc(ft_strlen(str) + 1);
+	str_len = ft_strlen(str);
+	res = (char *)malloc(str_len - 1);
 	if (res == NULL)
 		return (NULL);
-	*res = '-';
-	ft_strlcpy(res + 1, str, ft_strlen(str));
+	ft_strlcpy(res, str + 1, str_len);
 	return (res);
 }

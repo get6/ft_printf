@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 14:15:05 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/11 13:11:29 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/11 13:20:44 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,4 @@ void	ft_calc_minus(t_counter *cnt, t_format *fmt)
 	if (!ft_is_minus(fmt))
 		return ;
 	(void)cnt;
-
 }

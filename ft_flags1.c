@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:12 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/11 13:17:44 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/11 13:18:30 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,23 @@ void	ft_flag_minus(t_counter *cnt, t_format *fmt)
 
 void	ft_flag_zero(t_counter *cnt, t_format *fmt)
 {
-	int		neg;
 	int		i;
 	char	c;
 
 	if (fmt->option->flags->minus)
 		return ;
 	(void)cnt;
-	neg = ft_is_negative(fmt);
 	i = 0;
 	if (fmt->option->precision)
 		i = fmt->option->width - fmt->option->precision;
-	while (*(fmt->print + i + neg) != '\0')
+	while (*(fmt->print + i) != '\0')
 	{
-		c = *(fmt->print + i + neg);
+		c = *(fmt->print + i);
 		if (c == ' ')
-			*(fmt->print + i + neg) = '0';
+			*(fmt->print + i) = '0';
 		else
 			break ;
 		i++;
-	}
-	if (neg)
-	{
-		*(fmt->print + i + neg) = '0';
-		*(fmt->print) = '-';
 	}
 }
 
@@ -80,4 +73,3 @@ void	ft_flag_blank(t_counter *cnt, t_format *fmt)
 	(void)cnt;
 	(void)fmt;
 }
-

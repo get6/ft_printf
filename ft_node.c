@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:06:09 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/11 13:11:29 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/11 13:59:01 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	add_tail(t_linked_list *list, void *data)
 	if (list->head == NULL)
 		list->head = node;
 	else
-		list->head->next = node;
+		list->tail->next = node;
 	list->tail = node;
 }
 

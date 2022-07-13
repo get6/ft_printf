@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:15 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/11 17:06:32 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/13 21:54:45 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ void	ft_precision_string(t_format *fmt)
 		if (str == NULL)
 			return ;
 		ft_strlcpy(str, fmt->print, precision + 1);
-		free(fmt->print);
-		fmt->print = str;
-		fmt->length = ft_strlen(str);
+		ft_replace_print_str(fmt, str);
 	}
 }
 
@@ -61,7 +59,7 @@ void	ft_precision_number(t_format *fmt)
 	if (!precision && *((int *)fmt->value) == 0)
 	{
 		*fmt->print = '\0';
-		fmt->length -= 1;
+		fmt->length--;
 		return ;
 	}
 	if (length < precision)
@@ -72,15 +70,15 @@ void	ft_precision_number(t_format *fmt)
 		ft_memset(str, '0', precision - length);
 		ft_memcpy(str + precision - length, fmt->print, length);
 		*(str + precision) = '\0';
-		free(fmt->print);
-		fmt->print = str;
-		fmt->length = ft_strlen(str);
+		ft_replace_print_str(fmt, str);
 	}
 }
 
-void	ft_calc_precision(t_counter *cnt, t_format *fmt)
+void	ft_calc_precision(t_counter *cnt)
 {
-	(void)cnt;
+	t_format	*fmt;
+
+	fmt = cnt->fmt;
 	if (ft_is_same_type(fmt, 's'))
 		ft_precision_string(fmt);
 	else if (ft_is_same_type(fmt, 'd') || ft_is_same_type(fmt, 'i') \

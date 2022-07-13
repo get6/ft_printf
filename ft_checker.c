@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:15:30 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/11 13:09:56 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/13 19:19:08 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	ft_check_flags(const char *str, t_format *fmt, t_operation *ops)
 	c = ft_getchar(str, fmt);
 	if (c != '\0' && ft_strchr("-+0 #", c) != NULL)
 	{
-		if (c == '-')
+		if (c == '-' && !fmt->option->flags->minus)
 			fmt->option->flags->minus = 1;
-		else if (c == '+')
+		if (c == '+' && !fmt->option->flags->plus)
 			fmt->option->flags->plus = 1;
-		else if (c == '0')
+		if (c == '0' && !fmt->option->flags->zero)
 			fmt->option->flags->zero = 1;
-		else if (c == ' ')
+		if (c == ' ' && !fmt->option->flags->blank)
 			fmt->option->flags->blank = 1;
-		else if (c == '#')
+		if (c == '#' && !fmt->option->flags->sharp)
 			fmt->option->flags->sharp = 1;
 		push(fmt->operations, &ops[c]);
 		*(fmt->index) += 1;

@@ -6,16 +6,18 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:54:24 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/11 17:20:37 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/13 21:51:22 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_type_usigned_decimal(t_counter *cnt, t_format *fmt)
+void	ft_type_usigned_decimal(t_counter *cnt)
 {
+	t_format		*fmt;
 	unsigned int	arg;
 
+	fmt = cnt->fmt;
 	arg = va_arg(*(cnt->ap), int);
 	fmt->value = (unsigned int *)malloc(sizeof(unsigned int));
 	if (fmt->value == NULL)
@@ -27,10 +29,12 @@ void	ft_type_usigned_decimal(t_counter *cnt, t_format *fmt)
 	fmt->length = ft_strlen(fmt->print);
 }
 
-void	ft_type_lower_hexadecimal(t_counter *cnt, t_format *fmt)
+void	ft_type_lower_hexadecimal(t_counter *cnt)
 {
+	t_format		*fmt;
 	unsigned int	arg;
 
+	fmt = cnt->fmt;
 	arg = va_arg(*(cnt->ap), unsigned int);
 	fmt->value = (unsigned int *)malloc(sizeof(unsigned int));
 	if (fmt->value == NULL)
@@ -42,10 +46,12 @@ void	ft_type_lower_hexadecimal(t_counter *cnt, t_format *fmt)
 	fmt->length = ft_strlen(fmt->print);
 }
 
-void	ft_type_upper_hexadecimal(t_counter *cnt, t_format *fmt)
+void	ft_type_upper_hexadecimal(t_counter *cnt)
 {
+	t_format		*fmt;
 	unsigned int	arg;
 
+	fmt = cnt->fmt;
 	arg = va_arg(*(cnt->ap), unsigned int);
 	fmt->value = (unsigned int *)malloc(sizeof(unsigned int));
 	if (fmt->value == NULL)
@@ -57,9 +63,11 @@ void	ft_type_upper_hexadecimal(t_counter *cnt, t_format *fmt)
 	fmt->length = ft_strlen(fmt->print);
 }
 
-void	ft_type_percent(t_counter *cnt, t_format *fmt)
+void	ft_type_percent(t_counter *cnt)
 {
-	(void)cnt;
+	t_format	*fmt;
+
+	fmt = cnt->fmt;
 	fmt->value = (char *)malloc(1);
 	if (fmt->value == NULL)
 		return ;

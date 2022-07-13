@@ -1,49 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   ft_utils2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 14:47:52 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/11 17:20:56 by sunhwang         ###   ########.fr       */
+/*   Created: 2022/07/13 21:13:00 by sunhwang          #+#    #+#             */
+/*   Updated: 2022/07/13 21:13:10 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	ft_safer_free(void **ptr)
-{
-	if (ptr == NULL || *ptr == NULL)
-		return ;
-	free(*ptr);
-	*ptr = NULL;
-}
-
-void	ft_putchar(char c)
-{
-	write(STDOUT_FILENO, &c, 1);
-}
-
-void	ft_putstr(char *s)
-{
-	int	s_len;
-
-	if (s == NULL)
-		return ;
-	s_len = ft_strlen(s);
-	write(STDOUT_FILENO, s, s_len);
-}
-
-char	ft_getchar(const char *str, t_format *fmt)
-{
-	int		i;
-	char	c;
-
-	i = *(fmt->index);
-	c = *(str + i);
-	return (c);
-}
 
 static int	ft_recursive_putnbr(char **str, long long n, char *base, int s_len)
 {
@@ -116,4 +83,11 @@ char	*ft_delete_minus(int n)
 		return (NULL);
 	ft_strlcpy(res, str + 1, str_len);
 	return (res);
+}
+
+void	ft_replace_print_str(t_format *fmt, char *new)
+{
+	free(fmt->print);
+	fmt->print = new;
+	fmt->length = ft_strlen(new);
 }

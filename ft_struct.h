@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 20:53:42 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/10 15:16:26 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/13 21:48:55 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,11 @@ typedef struct s_flag
 	char	zero;
 }	t_flag;
 
-typedef struct s_counter
-{
-	int		total;
-	va_list	*ap;
-}	t_counter;
-
 typedef struct s_option
 {
 	t_flag	*flags;
-	char	width;
-	char	precision;
+	int		width;
+	int		precision;
 }	t_option;
 
 typedef struct s_format
@@ -63,6 +57,13 @@ typedef struct s_format
 	t_stack		*operations;
 }	t_format;
 
-typedef void			(*t_operation)(t_counter *cnt, t_format *fmt);
+typedef struct s_counter
+{
+	int			total;
+	va_list		*ap;
+	t_format	*fmt;
+}	t_counter;
+
+typedef void			(*t_operation)(t_counter *cnt);
 
 #endif

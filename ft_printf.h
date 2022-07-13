@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:26:31 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/11 15:23:34 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/13 21:52:05 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ void		ft_safer_free(void **ptr);
 void		ft_putchar(char c);
 void		ft_putstr(char *s);
 char		ft_getchar(const char *str, t_format *fmt);
+int			ft_check_total(t_counter *cnt, int length);
 char		*ft_putnbr_base(long long nbr, char *base);
 int			ft_is_minus(t_format *fmt);
 char		*ft_delete_minus(int n);
+void		ft_replace_print_str(t_format *fmt, char *new);
 
 // ft_operations.c
 void		ft_initialize_operations_array(t_operation *ops);
-void		ft_get_format(t_counter *cnt, t_format *fmt);
+void		ft_get_format(t_counter *cnt);
 
 // ft_checker.c
 void		ft_check_flags(const char *str, t_format *fmt, t_operation *ops);
@@ -63,6 +65,6 @@ char		*ft_char_to_string(char c);
 // ft_type3.c
 int			ft_is_same_type(t_format *fmt, char c);
 int			ft_is_nul(t_format *fmt);
-void		ft_calc_minus(t_counter *cnt, t_format *fmt);
+void		ft_calc_minus(t_counter *cnt);
 
 #endif

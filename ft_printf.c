@@ -6,13 +6,14 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:26:33 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/10 22:34:35 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/13 21:11:45 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_check_conversion(const char *str, t_format *fmt, t_operation *ops)
+static void	ft_check_conversion(const char *str, t_format *fmt, \
+t_operation *ops)
 {
 	ft_check_flags(str, fmt, ops);
 	ft_check_width(str, fmt, ops);
@@ -20,52 +21,45 @@ void	ft_check_conversion(const char *str, t_format *fmt, t_operation *ops)
 	ft_check_type(str, fmt, ops);
 }
 
-int	ft_check_total(t_counter *cnt, int length)
+static void	ft_print_char(t_format *fmt)
 {
-	if (cnt->total + length < 2147483647)
-		cnt->total += length;
+	if (fmt->option->flags->minus)
+	{
+		ft_putchar(*((char *)fmt->value));
+		ft_putstr(fmt->print);
+	}
 	else
 	{
-		cnt->total = -1;
-		return (0);
+		ft_putstr(fmt->print);
+		ft_putchar(*((char *)fmt->value));
 	}
-	return (1);
 }
 
-int	ft_handle_format(const char *str, t_counter *cnt, t_format *fmt, \
+static int	ft_handle_format(const char *str, t_counter *cnt, \
 t_operation *ops)
 {
+	int			res;
+	t_format	*fmt;
+
+	res = 0;
+	fmt = cnt->fmt;
 	ft_check_conversion(str, fmt, ops);
-	ft_get_format(cnt, fmt);
+	ft_get_format(cnt);
 	if (ft_check_total(cnt, fmt->length))
 	{
+		res = 1;
 		if (ft_is_same_type(fmt, 'c') && *((char *)fmt->value) == '\0')
-		{
-			if (fmt->option->flags->minus)
-			{
-				ft_putchar(*((char *)fmt->value));
-				ft_putstr(fmt->print);
-			}
-			else
-			{
-				ft_putstr(fmt->print);
-				ft_putchar(*((char *)fmt->value));
-			}
-		}
+			ft_print_char(fmt);
 		else
 			ft_putstr(fmt->print);
-		ft_format_free(fmt);
-		return (1);
 	}
-	else
-		ft_format_free(fmt);
-	return (0);
+	ft_format_free(fmt);
+	return (res);
 }
 
-void	ft_loop_format(const char *str, t_counter *cnt, t_operation *ops)
+static void	ft_loop_format(const char *str, t_counter *cnt, t_operation *ops)
 {
 	int			i;
-	int			res;
 	t_format	*fmt;
 
 	i = cnt->total;
@@ -78,8 +72,8 @@ void	ft_loop_format(const char *str, t_counter *cnt, t_operation *ops)
 			if (fmt == NULL)
 				break ;
 			fmt->index = &i;
-			res = ft_handle_format(str, cnt, fmt, ops);
-			if (res == 1)
+			cnt->fmt = fmt;
+			if (ft_handle_format(str, cnt, ops))
 				continue ;
 			else
 				break ;

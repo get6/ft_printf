@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 18:34:05 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/09 19:36:27 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/13 20:55:30 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_counter	*ft_counter_new(va_list *ap)
 		return (NULL);
 	new->total = 0;
 	new->ap = ap;
+	new->fmt = NULL;
 	return (new);
 }
 
@@ -31,9 +32,9 @@ static t_flag	*ft_flag_new(void)
 	new = (t_flag *)malloc(sizeof(t_flag));
 	if (new == NULL)
 		return (NULL);
-	new->plus = 1;
+	new->plus = 0;
 	new->minus = 0;
-	new->blank = 1;
+	new->blank = 0;
 	new->sharp = 0;
 	new->zero = 0;
 	return (new);

@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:54:24 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/13 21:51:22 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 11:43:54 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_type_usigned_decimal(t_counter *cnt)
 {
 	t_format		*fmt;
 	unsigned int	arg;
+	char			*str;
 
 	fmt = cnt->fmt;
 	arg = va_arg(*(cnt->ap), int);
@@ -23,59 +24,62 @@ void	ft_type_usigned_decimal(t_counter *cnt)
 	if (fmt->value == NULL)
 		return ;
 	*((unsigned int *)fmt->value) = arg;
-	fmt->print = ft_putnbr_base(arg, "0123456789");
-	if (fmt->print == NULL)
+	str = ft_putnbr_base(arg, "0123456789");
+	if (str == NULL)
 		return ;
-	fmt->length = ft_strlen(fmt->print);
+	ft_replace_print_str(fmt, str);
 }
 
 void	ft_type_lower_hexadecimal(t_counter *cnt)
 {
 	t_format		*fmt;
 	unsigned int	arg;
+	char			*str;
 
 	fmt = cnt->fmt;
 	arg = va_arg(*(cnt->ap), unsigned int);
 	fmt->value = (unsigned int *)malloc(sizeof(unsigned int));
 	if (fmt->value == NULL)
 		return ;
-	*((int *)fmt->value) = arg;
-	fmt->print = ft_putnbr_base(arg, "0123456789abcdef");
-	if (fmt->print == NULL)
+	*((unsigned int *)fmt->value) = arg;
+	str = ft_putnbr_base(arg, "0123456789abcdef");
+	if (str == NULL)
 		return ;
-	fmt->length = ft_strlen(fmt->print);
+	ft_replace_print_str(fmt, str);
 }
 
 void	ft_type_upper_hexadecimal(t_counter *cnt)
 {
 	t_format		*fmt;
 	unsigned int	arg;
+	char			*str;
 
 	fmt = cnt->fmt;
 	arg = va_arg(*(cnt->ap), unsigned int);
 	fmt->value = (unsigned int *)malloc(sizeof(unsigned int));
 	if (fmt->value == NULL)
 		return ;
-	*((int *)fmt->value) = arg;
-	fmt->print = ft_putnbr_base(arg, "0123456789ABCDEF");
-	if (fmt->print == NULL)
+	*((unsigned int *)fmt->value) = arg;
+	str = ft_putnbr_base(arg, "0123456789ABCDEF");
+	if (str == NULL)
 		return ;
-	fmt->length = ft_strlen(fmt->print);
+	ft_replace_print_str(fmt, str);
 }
 
 void	ft_type_percent(t_counter *cnt)
 {
 	t_format	*fmt;
+	char		*str;
 
 	fmt = cnt->fmt;
 	fmt->value = (char *)malloc(1);
 	if (fmt->value == NULL)
 		return ;
 	*((char *)fmt->value) = '%';
-	fmt->print = ft_char_to_string('%');
-	if (fmt->print == NULL)
+	str = ft_char_to_string('%');
+	if (str == NULL)
 		return ;
-	fmt->length = ft_strlen(fmt->print);
+	ft_replace_print_str(fmt, str);
 }
 
 char	*ft_char_to_string(char c)

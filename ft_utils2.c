@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 21:13:00 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/13 21:13:10 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 11:39:27 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_is_minus(t_format *fmt)
 	return (minus);
 }
 
-char	*ft_delete_minus(int n)
+char	*ft_delete_minus(long long n)
 {
 	int		str_len;
 	char	*res;
@@ -87,7 +87,8 @@ char	*ft_delete_minus(int n)
 
 void	ft_replace_print_str(t_format *fmt, char *new)
 {
-	free(fmt->print);
+	if (!fmt->print)
+		free(fmt->print);
 	fmt->print = new;
 	fmt->length = ft_strlen(new);
 }

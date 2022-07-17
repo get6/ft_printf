@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:15 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/13 21:54:45 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/14 12:47:32 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ void	ft_precision_number(t_format *fmt)
 		if (str == NULL)
 			return ;
 		ft_memset(str, '0', precision - length);
-		ft_memcpy(str + precision - length, fmt->print, length);
-		*(str + precision) = '\0';
+		ft_strlcpy(str + precision - length, fmt->print, length + 1);
 		ft_replace_print_str(fmt, str);
 	}
 }

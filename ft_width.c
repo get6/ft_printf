@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:22 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/13 21:55:18 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 10:56:08 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_get_width(const char *str, t_format *fmt)
 	return (width);
 }
 
-void	ft_ajdust_width(t_format *fmt)
+static void	ft_ajdust_width(t_format *fmt)
 {
 	if (!fmt->option->width)
 		fmt->option->width = fmt->length;
@@ -42,10 +42,18 @@ void	ft_ajdust_width(t_format *fmt)
 		fmt->option->width--;
 }
 
+static int	ft_get_absolute_value(int n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
+}
+
 void	ft_calc_width(t_counter *cnt)
 {
 	t_format	*fmt;
 	int			width;
+	int			empty_width;
 	int			length;
 	char		*str;
 
@@ -55,11 +63,13 @@ void	ft_calc_width(t_counter *cnt)
 	length = fmt->length;
 	if (width < length)
 		width = length;
+	empty_width = ft_get_absolute_value(length - width);
 	str = (char *)malloc(width + 1);
 	if (str == NULL)
 		return ;
-	ft_memset(str, ' ', width);
-	ft_memcpy(str + (width - length), fmt->print, length);
-	*(str + width) = '\0';
+	ft_memset(str, ' ', empty_width);
+	ft_strlcpy(str + empty_width, fmt->print, length + 1);
+	fmt->option->width = width;
+	fmt->option->empty_width = empty_width;
 	ft_replace_print_str(fmt, str);
 }

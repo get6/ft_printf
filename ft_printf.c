@@ -6,20 +6,11 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:26:33 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/13 21:11:45 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/16 21:00:25 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static void	ft_check_conversion(const char *str, t_format *fmt, \
-t_operation *ops)
-{
-	ft_check_flags(str, fmt, ops);
-	ft_check_width(str, fmt, ops);
-	ft_check_precision(str, fmt, ops);
-	ft_check_type(str, fmt, ops);
-}
 
 static void	ft_print_char(t_format *fmt)
 {
@@ -35,6 +26,18 @@ static void	ft_print_char(t_format *fmt)
 	}
 }
 
+static int	ft_check_total(t_counter *cnt, int length)
+{
+	if (cnt->total + length < 2147483647)
+		cnt->total += length;
+	else
+	{
+		cnt->total = -1;
+		return (0);
+	}
+	return (1);
+}
+
 static int	ft_handle_format(const char *str, t_counter *cnt, \
 t_operation *ops)
 {
@@ -43,7 +46,10 @@ t_operation *ops)
 
 	res = 0;
 	fmt = cnt->fmt;
-	ft_check_conversion(str, fmt, ops);
+	ft_check_flags(str, fmt, ops);
+	ft_check_width(str, fmt, ops);
+	ft_check_precision(str, fmt, ops);
+	ft_check_type(str, fmt, ops);
 	ft_get_format(cnt);
 	if (ft_check_total(cnt, fmt->length))
 	{
@@ -53,7 +59,7 @@ t_operation *ops)
 		else
 			ft_putstr(fmt->print);
 	}
-	ft_format_free(fmt);
+	ft_format_free(&(cnt->fmt));
 	return (res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:12 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/13 21:53:58 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 11:51:35 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ char	*ft_copy_str_with_flag(const char *src, char flag, int length)
 void	ft_flag_minus(t_counter *cnt)
 {
 	t_format	*fmt;
-	int			length;
-	int			start;
 	char		*str;
+	int			length;
+	int			i;
 
 	fmt = cnt->fmt;
 	if (!fmt->option->flags->minus || ft_is_nul(fmt))
@@ -49,16 +49,9 @@ void	ft_flag_minus(t_counter *cnt)
 	str = (char *)malloc(length + 1);
 	if (str == NULL)
 		return ;
-	start = 0;
-	while (*(fmt->print + start) != '\0')
-	{
-		if (*(fmt->print + start) == ' ')
-			start++;
-		else
-			break ;
-	}
+	i = ft_get_char_count_from_start(fmt->print, ' ');
 	ft_memset(str, ' ', length);
-	ft_memcpy(str, fmt->print + start, ft_strlen(fmt->print + start));
+	ft_memcpy(str, fmt->print + i, ft_strlen(fmt->print + i));
 	*(str + length) = '\0';
 	ft_replace_print_str(fmt, str);
 }
@@ -67,72 +60,71 @@ void	ft_flag_zero(t_counter *cnt)
 {
 	t_format	*fmt;
 	int			i;
-	char		c;
+	int			zeros;
+	int			did_while;
 
 	fmt = cnt->fmt;
 	if (!fmt->option->flags->zero || fmt->option->flags->minus)
 		return ;
 	i = 0;
-	if (fmt->option->flags->blank && !ft_is_minus(fmt))
+	if (!fmt->option->flags->plus && fmt->option->flags->blank && \
+	!ft_is_minus(fmt))
 		i = 1;
 	if (fmt->option->precision)
+	{
 		i = fmt->option->width - fmt->option->precision;
+		if (i < 0)
+			i = 0;
+	}
+	did_while = 0;
 	while (*(fmt->print + i) != '\0')
 	{
-		c = *(fmt->print + i);
-		if (c == ' ')
+		if (*(fmt->print + i) == ' ')
+		{
 			*(fmt->print + i) = '0';
+			did_while++;
+		}
 		else
 			break ;
 		i++;
 	}
-}
-
-void	ft_flag_sharp(t_counter *cnt)
-{
-	t_format	*fmt;
-
-	fmt = cnt->fmt;
+	zeros = ft_get_char_count_from_start(fmt->print, '0');
+	if (zeros && did_while)
+		fmt->option->empty_width -= zeros;
 }
 
 static	int	ft_find_blank(t_format *fmt)
 {
 	int	i;
 	int	find_digit;
-	int	find_blank;
 
 	i = 0;
 	find_digit = 0;
-	find_blank = 0;
-	while (*(fmt->print + i) != '\0')
+	while (!find_digit && *(fmt->print + i) != '\0')
 	{
 		if (ft_isdigit(*(fmt->print + i)))
 			find_digit = 1;
 		else if (!find_digit && *(fmt->print + i) == ' ')
-		{
-			find_blank = 1;
-			break ;
-		}
+			return (1);
 		i++;
 	}
-	return (find_blank);
+	return (0);
 }
 
 void	ft_flag_blank(t_counter *cnt)
 {
 	t_format	*fmt;
 	char		*str;
-	int			i;
 
 	fmt = cnt->fmt;
-	if (!fmt->option->flags->blank || ft_is_minus(fmt))
+	if (!fmt->option->flags->blank || fmt->option->flags->plus \
+	|| ft_is_minus(fmt))
 		return ;
 	if (ft_find_blank(fmt))
 		return ;
 	str = (char *)malloc(fmt->length + 1);
 	if (str == NULL)
 		return ;
-	i = 0;
 	if (fmt->option->flags->minus)
 	{
 		str = (char *)malloc(fmt->length + 2);

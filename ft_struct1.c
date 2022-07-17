@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 18:34:05 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/13 20:55:30 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/16 21:49:02 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static t_option	*ft_optional_new(void)
 		return (NULL);
 	}
 	new->width = 0;
+	new->empty_width = 0;
 	new->precision = 0;
 	return (new);
 }

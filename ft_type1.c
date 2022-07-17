@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:20 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/13 21:55:00 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 11:42:34 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_type_char(t_counter *cnt)
 {
 	t_format	*fmt;
 	char		arg;
+	char		*str;
 
 	fmt = cnt->fmt;
 	arg = (char)va_arg(*(cnt->ap), int);
@@ -23,9 +24,10 @@ void	ft_type_char(t_counter *cnt)
 	if (fmt->value == NULL)
 		return ;
 	*((char *)fmt->value) = arg;
-	fmt->print = ft_char_to_string(arg);
-	if (fmt->print == NULL)
+	str = ft_char_to_string(arg);
+	if (str == NULL)
 		return ;
+	ft_replace_print_str(fmt, str);
 	fmt->length = !ft_is_nul(fmt);
 }
 
@@ -33,6 +35,7 @@ void	ft_type_string(t_counter *cnt)
 {
 	t_format	*fmt;
 	char		*arg;
+	char		*str;
 
 	fmt = cnt->fmt;
 	arg = va_arg(*(cnt->ap), char *);
@@ -47,10 +50,10 @@ void	ft_type_string(t_counter *cnt)
 		if (fmt->value == NULL)
 			return ;
 	}
-	fmt->print = ft_strdup(arg);
-	if (fmt->print == NULL)
+	str = ft_strdup(arg);
+	if (str == NULL)
 		return ;
-	fmt->length = ft_strlen(fmt->print);
+	ft_replace_print_str(fmt, str);
 }
 
 void	ft_type_pointer(t_counter *cnt)
@@ -76,14 +79,14 @@ void	ft_type_pointer(t_counter *cnt)
 		return ;
 	ft_memcpy(dst, "0x", 3);
 	ft_strlcat(dst + 2, src, src_len);
-	fmt->print = dst;
-	fmt->length = ft_strlen(fmt->print);
+	ft_replace_print_str(fmt, dst);
 }
 
 void	ft_type_decimal(t_counter *cnt)
 {
 	t_format	*fmt;
 	int			arg;
+	char		*str;
 
 	fmt = cnt->fmt;
 	arg = va_arg(*(cnt->ap), int);
@@ -91,16 +94,17 @@ void	ft_type_decimal(t_counter *cnt)
 	if (fmt->value == NULL)
 		return ;
 	*((int *)fmt->value) = arg;
-	fmt->print = ft_delete_minus(arg);
-	if (fmt->print == NULL)
+	str = ft_delete_minus(arg);
+	if (str == NULL)
 		return ;
-	fmt->length = ft_strlen(fmt->print);
+	ft_replace_print_str(fmt, str);
 }
 
 void	ft_type_integer(t_counter *cnt)
 {
 	t_format	*fmt;
 	int			arg;
+	char		*str;
 
 	fmt = cnt->fmt;
 	arg = va_arg(*(cnt->ap), int);
@@ -108,8 +112,8 @@ void	ft_type_integer(t_counter *cnt)
 	if (fmt->value == NULL)
 		return ;
 	*((int *)fmt->value) = arg;
-	fmt->print = ft_delete_minus(arg);
-	if (fmt->print == NULL)
+	str = ft_delete_minus(arg);
+	if (str == NULL)
 		return ;
-	fmt->length = ft_strlen(fmt->print);
+	ft_replace_print_str(fmt, str);
 }

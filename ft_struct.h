@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 20:53:42 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/13 21:48:55 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 10:43:49 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_option
 {
 	t_flag	*flags;
 	int		width;
+	int		empty_width;
 	int		precision;
 }	t_option;
 

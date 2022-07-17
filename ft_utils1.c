@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:47:52 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/13 21:12:58 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/16 21:03:12 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,18 @@ char	ft_getchar(const char *str, t_format *fmt)
 	return (c);
 }
 
-int	ft_check_total(t_counter *cnt, int length)
+int	ft_get_char_count_from_start(const char *str, char c)
 {
-	if (cnt->total + length < 2147483647)
-		cnt->total += length;
-	else
+	int	i;
+
+	i = 0;
+	while (*str != '\0')
 	{
-		cnt->total = -1;
-		return (0);
+		if (*str == c)
+			i++;
+		else
+			break ;
+		str++;
 	}
-	return (1);
+	return (i);
 }

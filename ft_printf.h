@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:26:31 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 15:25:16 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 18:55:25 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char		ft_getchar(const char *str, t_format *fmt);
 int			ft_get_char_count_from_start(const char *str, char c);
 
 // ft_utils2.c
-char		*ft_putnbr_base(long long nbr, char *base);
+char		*ft_putnbr_base(unsigned long long nbr, char *base);
 int			ft_is_minus(t_format *fmt);
 char		*ft_delete_minus(long long n);
 void		ft_replace_print_str(t_format **fmt, char **new);

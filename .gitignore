@@ -6,3 +6,5 @@ main.c
 libft/
 printfTester/
 pft/
+ft_printf_tester/
+printf_lover_v2/

@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 18:34:05 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 12:41:44 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 16:26:37 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	ft_operations_free(t_format *fmt)
 		if (op != NULL)
 			ft_safer_free((void **)&op);
 	}
+	ft_safer_free((void **)&fmt->operations);
 }
 
 void	ft_format_free(t_format **p_fmt)

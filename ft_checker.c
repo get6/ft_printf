@@ -6,30 +6,55 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:15:30 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 15:28:45 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 21:21:26 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+static	int	ft_check_duplicate_flag(t_format *fmt, char c)
+{
+	if (c == '0' && !fmt->option->flags->zero)
+	{
+		fmt->option->flags->zero = 1;
+		return (1);
+	}
+	if (c == ' ' && !fmt->option->flags->blank)
+	{
+		fmt->option->flags->blank = 1;
+		return (1);
+	}
+	if (c == '#' && !fmt->option->flags->sharp)
+	{
+		fmt->option->flags->sharp = 1;
+		return (1);
+	}
+	return (0);
+}
+
 void	ft_check_flags(const char *str, t_format *fmt, t_operation *ops)
 {
+	unsigned int	find;
 	unsigned char	c;
 
+	find = 0;
 	c = ft_getchar(str, fmt);
 	if (c != '\0' && ft_strchr("-+0 #", c) != NULL)
 	{
 		if (c == '-' && !fmt->option->flags->minus)
+		{
 			fmt->option->flags->minus = 1;
-		if (c == '+' && !fmt->option->flags->plus)
+			find = 1;
+		}
+		else if (c == '+' && !fmt->option->flags->plus)
+		{
 			fmt->option->flags->plus = 1;
-		if (c == '0' && !fmt->option->flags->zero)
-			fmt->option->flags->zero = 1;
-		if (c == ' ' && !fmt->option->flags->blank)
-			fmt->option->flags->blank = 1;
-		if (c == '#' && !fmt->option->flags->sharp)
-			fmt->option->flags->sharp = 1;
-		push(fmt->operations, &ops[c]);
+			find = 1;
+		}
+		else
+			find = ft_check_duplicate_flag(fmt, c);
+		if (find)
+			push(fmt->operations, &ops[c]);
 		*(fmt->index) += 1;
 		ft_check_flags(str, fmt, ops);
 	}
@@ -54,6 +79,7 @@ void	ft_check_precision(const char *str, t_format *fmt, t_operation *ops)
 	{
 		*(fmt->index) += 1;
 		fmt->option->precision = ft_get_precision(str, fmt);
+		fmt->option->has_precision = 1;
 		push(fmt->operations, &ops['.']);
 	}
 }

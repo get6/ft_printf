@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 12:16:14 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 15:43:03 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 22:06:37 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static char	*ft_sharp_minus(t_format *fmt, char *sharp)
 	{
 		str = (char *)malloc(fmt->length + sharp_len \
 		- fmt->option->empty_width);
+		if (str == NULL)
+			return (NULL);
 		ft_memcpy(str, sharp, sharp_len);
 		ft_strlcpy(str + sharp_len, fmt->print, fmt->length + 1 \
 		- fmt->option->empty_width);
@@ -44,6 +46,8 @@ static char	*ft_sharp_minus(t_format *fmt, char *sharp)
 		ft_memmove(fmt->print + sharp_len, fmt->print, fmt->length - sharp_len);
 		ft_memmove(fmt->print, sharp, sharp_len);
 		str = ft_strdup(fmt->print);
+		if (str == NULL)
+			return (NULL);
 	}
 	return (str);
 }
@@ -60,6 +64,8 @@ static char	*ft_sharp_plus(t_format *fmt, char *sharp)
 	{
 		str = (char *)malloc(fmt->length + sharp_len \
 		- fmt->option->empty_width);
+		if (str == NULL)
+			return (NULL);
 		ft_memcpy(str, sharp, sharp_len);
 		ft_strlcpy(str + sharp_len, fmt->print + i, fmt->length + 1 - i);
 	}
@@ -67,9 +73,9 @@ static char	*ft_sharp_plus(t_format *fmt, char *sharp)
 	{
 		ft_memmove(fmt->print + i - sharp_len, sharp, sharp_len);
 		str = ft_strdup(fmt->print);
+		if (str == NULL)
+			return (NULL);
 	}
-	if (str == NULL)
-		return (NULL);
 	return (str);
 }
 

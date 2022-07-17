@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:20 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 16:04:28 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 18:55:15 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_type_pointer(t_counter *cnt)
 	if (fmt->value == NULL)
 		return ;
 	*((unsigned long long *)fmt->value) = arg;
-	src = ft_putnbr_base(arg, "0123456789abcdef");
+	src = ft_putnbr_base((unsigned long long)arg, "0123456789abcdef");
 	if (src == NULL)
 		return ;
 	src_len = ft_strlen(src);
@@ -79,6 +79,7 @@ void	ft_type_pointer(t_counter *cnt)
 		return ;
 	ft_memcpy(dst, "0x", 2);
 	ft_strlcpy(dst + 2, src, src_len + 1);
+	ft_safer_free((void **)&src);
 	ft_replace_print_str(&fmt, &dst);
 }
 

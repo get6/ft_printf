@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:26:33 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 16:08:50 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 18:33:34 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ t_operation *ops)
 	{
 		res = 1;
 		if (ft_is_same_type(fmt, 'c') && *((char *)fmt->value) == '\0')
+		{
+			ft_check_total(cnt, 1);
 			ft_print_char(fmt);
+		}
 		else
 			ft_putstr(fmt->print);
 	}

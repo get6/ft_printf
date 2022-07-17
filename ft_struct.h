@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 20:53:42 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 10:43:49 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 21:20:13 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_option
 	int		width;
 	int		empty_width;
 	int		precision;
+	char	has_precision;
 }	t_option;
 
 typedef struct s_format

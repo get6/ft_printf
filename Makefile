@@ -6,7 +6,7 @@
 #    By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/18 21:06:29 by sunhwang          #+#    #+#              #
-#    Updated: 2022/07/17 15:27:11 by sunhwang         ###   ########.fr        #
+#    Updated: 2022/07/17 21:42:30 by sunhwang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,6 @@ all: $(NAME)
 
 $(NAME): ref $(OBJS)
 	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
-
-# $(NAME) : $(OBJS)
-# 	cp ./libft/libft.a ./$(NAME)
-# 	$(AR) -q $(NAME) $(OBJS)
 
 clean:
 	$(RM) $(OBJS)

@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:12 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 15:43:03 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 21:22:21 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,13 @@ void	ft_flag_zero(t_counter *cnt)
 	fmt = cnt->fmt;
 	if (!fmt->option->flags->zero || fmt->option->flags->minus)
 		return ;
+	if (fmt->option->has_precision && !fmt->option->precision)
+		return ;
 	i = 0;
 	if (!fmt->option->flags->plus && fmt->option->flags->blank && \
 	!ft_is_minus(fmt))
 		i = 1;
-	if (fmt->option->precision)
+	if (fmt->option->has_precision && fmt->option->precision)
 	{
 		i = fmt->option->width - fmt->option->precision;
 		if (i < 0)

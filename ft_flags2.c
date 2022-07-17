@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 18:15:38 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 15:43:03 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 19:47:08 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,20 @@ static	int	ft_find_blank(t_format *fmt)
 	return (0);
 }
 
+static char	*ft_blank_minus(t_format *fmt)
+{
+	char	*str;
+
+	str = (char *)malloc(fmt->length + 2);
+	if (str == NULL)
+		return (NULL);
+	*str = ' ';
+	ft_strlcpy(str + 1, fmt->print, fmt->length + 1);
+	if (*(str + fmt->length) == ' ')
+		*(str + fmt->length) = '\0';
+	return (str);
+}
+
 void	ft_flag_blank(t_counter *cnt)
 {
 	t_format	*fmt;
@@ -64,20 +78,11 @@ void	ft_flag_blank(t_counter *cnt)
 		return ;
 	if (ft_find_blank(fmt))
 		return ;
-	str = (char *)malloc(fmt->length + 1);
-	if (str == NULL)
-		return ;
 	if (fmt->option->flags->minus)
-	{
-		str = (char *)malloc(fmt->length + 2);
-		if (str == NULL)
-			return ;
-		*str = ' ';
-		ft_strlcpy(str + 1, fmt->print, fmt->length + 1);
-		if (*(str + fmt->length) == ' ')
-			*(str + fmt->length) = '\0';
-	}
+		str = ft_blank_minus(fmt);
 	else
 		str = ft_copy_str_with_flag(fmt->print, ' ', fmt->length);
+	if (str == NULL)
+		return ;
 	ft_replace_print_str(&fmt, &str);
 }

@@ -6,10 +6,11 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:15:00 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/11 13:49:55 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 12:42:10 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "ft_stack.h"
 
 void	initialize_stack(t_stack *stack)

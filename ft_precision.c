@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:15 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/14 12:47:32 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 12:34:52 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_get_precision(const char *str, t_format *fmt)
 	return (precision);
 }
 
-void	ft_precision_string(t_format *fmt)
+static void	ft_precision_string(t_format *fmt)
 {
 	int		precision;
 	int		length;
@@ -48,7 +48,7 @@ void	ft_precision_string(t_format *fmt)
 	}
 }
 
-void	ft_precision_number(t_format *fmt)
+static void	ft_precision_number(t_format *fmt)
 {
 	int		precision;
 	int		length;

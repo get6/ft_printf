@@ -6,13 +6,13 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 18:34:05 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/14 10:58:31 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 12:41:44 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_operations_free(t_format *fmt)
+static void	ft_operations_free(t_format *fmt)
 {
 	t_operation	*op;
 

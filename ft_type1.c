@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:20 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 11:42:34 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 16:04:28 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_type_char(t_counter *cnt)
 	str = ft_char_to_string(arg);
 	if (str == NULL)
 		return ;
-	ft_replace_print_str(fmt, str);
+	ft_replace_print_str(&fmt, &str);
 	fmt->length = !ft_is_nul(fmt);
 }
 
@@ -53,7 +53,7 @@ void	ft_type_string(t_counter *cnt)
 	str = ft_strdup(arg);
 	if (str == NULL)
 		return ;
-	ft_replace_print_str(fmt, str);
+	ft_replace_print_str(&fmt, &str);
 }
 
 void	ft_type_pointer(t_counter *cnt)
@@ -73,13 +73,13 @@ void	ft_type_pointer(t_counter *cnt)
 	src = ft_putnbr_base(arg, "0123456789abcdef");
 	if (src == NULL)
 		return ;
-	src_len = ft_strlen(src) + 2;
-	dst = (char *)malloc(src_len);
+	src_len = ft_strlen(src);
+	dst = (char *)malloc(src_len + 3);
 	if (dst == NULL)
 		return ;
-	ft_memcpy(dst, "0x", 3);
-	ft_strlcat(dst + 2, src, src_len);
-	ft_replace_print_str(fmt, dst);
+	ft_memcpy(dst, "0x", 2);
+	ft_strlcpy(dst + 2, src, src_len + 1);
+	ft_replace_print_str(&fmt, &dst);
 }
 
 void	ft_type_decimal(t_counter *cnt)
@@ -97,7 +97,7 @@ void	ft_type_decimal(t_counter *cnt)
 	str = ft_delete_minus(arg);
 	if (str == NULL)
 		return ;
-	ft_replace_print_str(fmt, str);
+	ft_replace_print_str(&fmt, &str);
 }
 
 void	ft_type_integer(t_counter *cnt)
@@ -115,5 +115,5 @@ void	ft_type_integer(t_counter *cnt)
 	str = ft_delete_minus(arg);
 	if (str == NULL)
 		return ;
-	ft_replace_print_str(fmt, str);
+	ft_replace_print_str(&fmt, &str);
 }

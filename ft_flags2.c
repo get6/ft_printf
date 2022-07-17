@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 18:15:38 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 12:23:28 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 15:43:03 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_flag_plus(t_counter *cnt)
 		str = ft_copy_str_with_flag(fmt->print, '+', fmt->length);
 	if (str == NULL)
 		return ;
-	ft_replace_print_str(fmt, str);
+	ft_replace_print_str(&fmt, &str);
 }
 
 static	int	ft_find_blank(t_format *fmt)
@@ -79,5 +79,5 @@ void	ft_flag_blank(t_counter *cnt)
 	}
 	else
 		str = ft_copy_str_with_flag(fmt->print, ' ', fmt->length);
-	ft_replace_print_str(fmt, str);
+	ft_replace_print_str(&fmt, &str);
 }

@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:12 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 12:23:28 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 15:43:03 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_flag_minus(t_counter *cnt)
 	ft_memset(str, ' ', length);
 	ft_memcpy(str, fmt->print + i, ft_strlen(fmt->print + i));
 	*(str + length) = '\0';
-	ft_replace_print_str(fmt, str);
+	ft_replace_print_str(&fmt, &str);
 }
 
 static int	ft_do_while_black_to_zero(t_format *fmt, int i)

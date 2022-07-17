@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:54:24 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 11:43:54 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 15:43:03 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_type_usigned_decimal(t_counter *cnt)
 	str = ft_putnbr_base(arg, "0123456789");
 	if (str == NULL)
 		return ;
-	ft_replace_print_str(fmt, str);
+	ft_replace_print_str(&fmt, &str);
 }
 
 void	ft_type_lower_hexadecimal(t_counter *cnt)
@@ -45,7 +45,7 @@ void	ft_type_lower_hexadecimal(t_counter *cnt)
 	str = ft_putnbr_base(arg, "0123456789abcdef");
 	if (str == NULL)
 		return ;
-	ft_replace_print_str(fmt, str);
+	ft_replace_print_str(&fmt, &str);
 }
 
 void	ft_type_upper_hexadecimal(t_counter *cnt)
@@ -63,7 +63,7 @@ void	ft_type_upper_hexadecimal(t_counter *cnt)
 	str = ft_putnbr_base(arg, "0123456789ABCDEF");
 	if (str == NULL)
 		return ;
-	ft_replace_print_str(fmt, str);
+	ft_replace_print_str(&fmt, &str);
 }
 
 void	ft_type_percent(t_counter *cnt)
@@ -79,7 +79,7 @@ void	ft_type_percent(t_counter *cnt)
 	str = ft_char_to_string('%');
 	if (str == NULL)
 		return ;
-	ft_replace_print_str(fmt, str);
+	ft_replace_print_str(&fmt, &str);
 }
 
 char	*ft_char_to_string(char c)
@@ -89,7 +89,7 @@ char	*ft_char_to_string(char c)
 	str = (char *)malloc(2);
 	if (str == NULL)
 		return (NULL);
-	ft_memcpy(str, &c, 2);
+	ft_memcpy(str, &c, 1);
 	*(str + 1) = '\0';
 	return (str);
 }

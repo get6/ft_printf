@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 21:13:00 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 11:39:27 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 16:07:28 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static int	ft_recursive_putnbr(char **str, long long n, char *base, int s_len)
 	b_len = ft_strlen(base);
 	if (n == 0)
 	{
-		*str = (char *)malloc(s_len - 1);
+		*str = (char *)malloc(s_len);
 		if (*str == NULL)
 			return (-1);
-		*(*str + (s_len - 2)) = '\0';
+		*(*str + (s_len - 1)) = '\0';
 		return (0);
 	}
 	i = ft_recursive_putnbr(str, n / b_len, base, s_len + 1);
@@ -41,11 +41,9 @@ char	*ft_putnbr_base(long long nbr, char *base)
 	res = NULL;
 	if (nbr == 0)
 	{
-		res = (char *)malloc(2);
+		res = ft_char_to_string('0');
 		if (res == NULL)
 			return (NULL);
-		*res = '0';
-		*(res + 1) = '\0';
 		return (res);
 	}
 	ft_recursive_putnbr(&res, nbr, base, 1);
@@ -85,10 +83,10 @@ char	*ft_delete_minus(long long n)
 	return (res);
 }
 
-void	ft_replace_print_str(t_format *fmt, char *new)
+void	ft_replace_print_str(t_format **fmt, char **new)
 {
-	if (!fmt->print)
-		free(fmt->print);
-	fmt->print = new;
-	fmt->length = ft_strlen(new);
+	if (!(*fmt)->print)
+		free((*fmt)->print);
+	(*fmt)->print = *new;
+	(*fmt)->length = ft_strlen(*new);
 }

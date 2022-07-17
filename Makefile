@@ -6,7 +6,7 @@
 #    By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/18 21:06:29 by sunhwang          #+#    #+#              #
-#    Updated: 2022/07/17 12:37:32 by sunhwang         ###   ########.fr        #
+#    Updated: 2022/07/17 15:27:11 by sunhwang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,12 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-# $(NAME) : ref $(OBJS)
-# 	cp ./libft/libft.a ./libftprintf.a
-# 	$(AR) -q libftprintf.a $(OBJS)
-
 $(NAME): ref $(OBJS)
-	$(AR) $(ARFLAGS) libftprintf.a $(OBJS)
-#	$(AR) $(ARFLAGS)T libftprintf.a libft/libft.a $(OBJS)
+	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+
+# $(NAME) : $(OBJS)
+# 	cp ./libft/libft.a ./$(NAME)
+# 	$(AR) -q $(NAME) $(OBJS)
 
 clean:
 	$(RM) $(OBJS)
@@ -34,12 +33,14 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 
-%.o: %.c
-	$(CC) $(CFLGAS) -c $<
-
 re:
 	$(MAKE) fclean
 	$(MAKE) all
+
+bonus: $(NAME)
+
+%.o: %.c
+	$(CC) $(CFLGAS) -c $<
 
 ref:
 	$(MAKE) -C libft
@@ -50,9 +51,11 @@ main: main.o
 do: $(NAME) main
 
 ifneq (,$(findstring do,$(MAKECMDGOALS)))
-CFLGAS += -g3 -fsanitize=address
+CFLGAS += -g3 #-fsanitize=address;
 endif
 
 tre: fclean
 	$(RM) main.o
 	$(MAKE) do
+
+.PHONY: all clean fclean re

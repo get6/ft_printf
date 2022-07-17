@@ -6,13 +6,12 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:15:30 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/13 19:19:08 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/17 12:12:15 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// TODO 일단 중복되게 넣어보고 문제가 되면 검증하는 로직 추가
 void	ft_check_flags(const char *str, t_format *fmt, t_operation *ops)
 {
 	unsigned char	c;
@@ -83,7 +82,6 @@ void	ft_check_type(const char *str, t_format *fmt, t_operation *ops)
 		push(fmt->operations, &ops['X']);
 	else if (c == '%')
 		push(fmt->operations, &ops['%']);
-	// 4개말고 더 있을 수 있음
 	if (c == 'd' || c == 'i' || c == 'x' || c == 'X')
 		appendleft(fmt->operations, &ops['m']);
 }

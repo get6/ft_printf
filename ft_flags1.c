@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:12 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 21:22:21 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/18 15:29:55 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	ft_flag_minus(t_counter *cnt)
 	int			i;
 
 	fmt = cnt->fmt;
-	if (!fmt->option->flags->minus || ft_is_nul(fmt))
+	if (!fmt->option->flags->minus || ft_is_nul(fmt) \
+	|| !fmt->option->empty_width)
 		return ;
 	length = ft_strlen(fmt->print);
 	str = (char *)malloc(length + 1);

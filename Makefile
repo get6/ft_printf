@@ -6,7 +6,7 @@
 #    By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/18 21:06:29 by sunhwang          #+#    #+#              #
-#    Updated: 2022/07/17 21:42:30 by sunhwang         ###   ########.fr        #
+#    Updated: 2022/07/18 16:22:35 by sunhwang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ main: main.o
 do: $(NAME) main
 
 ifneq (,$(findstring do,$(MAKECMDGOALS)))
-CFLGAS += -g3 #-fsanitize=address;
+CFLGAS += -g3 #-fsanitize=address
 endif
 
 tre: fclean

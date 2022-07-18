@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:01:22 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 15:43:03 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/18 15:25:40 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	ft_calc_width(t_counter *cnt)
 	ft_ajdust_width(fmt);
 	width = fmt->option->width;
 	length = fmt->length;
+	if (width == length)
+		return ;
 	if (width < length)
 		width = length;
 	empty_width = ft_get_absolute_value(length - width);

@@ -6,7 +6,7 @@
 /*   By: sunhwang <sunhwang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 18:15:38 by sunhwang          #+#    #+#             */
-/*   Updated: 2022/07/17 19:47:08 by sunhwang         ###   ########.fr       */
+/*   Updated: 2022/07/18 16:21:14 by sunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	ft_flag_blank(t_counter *cnt)
 
 	fmt = cnt->fmt;
 	if (!fmt->option->flags->blank || fmt->option->flags->plus \
-	|| ft_is_minus(fmt))
+	|| ft_is_minus(fmt) || !(ft_is_same_type(fmt, 'd') \
+	|| ft_is_same_type(fmt, 'i')))
 		return ;
 	if (ft_find_blank(fmt))
 		return ;
